@@ -6,7 +6,8 @@ A simple Flask REST API for processing arrays of strings—separating digits, le
 
 ##  API Endpoint
 
-### POST `/bfhl` or `/`
+### POST `/bfhl`
+### Public Link `https://bajaj-api-1vof.onrender.com/bfhl`
 
 **Description:**  
 Accepts a JSON payload with a `data` array of strings. Outputs a JSON response containing categorized data, numeric sum, and concatenated alphabetic string with case alternation.
