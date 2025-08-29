@@ -1,8 +1,11 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, Response
+from collections import OrderedDict
 from flask_cors import CORS
+import json
 
 app = Flask(__name__)
 CORS(app)
+app.config['JSON_SORT_KEYS'] = False
 
 def ProcessNumbers(arr):
     even = []
@@ -50,19 +53,24 @@ def home():
     roll_no = "22BCE1020"
     email = "omnavinyogesh.icc@gmail.com"
 
-    response = {
-        "is_success": True,
-        "user_id": user_id,
-        "email" : email,
-        "roll_number": roll_no,
-        "odd_numbers": oddArr,
-        "even_numbers": evenArr,
-        "alphabets": alpArr,
-        "special_characters": specialArr,
-        "sum": str(sumNum),
-        "concat_string": concat
-    }
-    return jsonify(response)
+    response = OrderedDict()
+    response["is_success"] = True
+    response["user_id"] = user_id
+    response["email"] = email
+    response["roll_number"] = roll_no
+    response["odd_numbers"] = oddArr
+    response["even_numbers"] = evenArr
+    response["alphabets"] = alpArr
+    response["special_characters"] = specialArr
+    response["sum"] = str(sumNum)
+    response["concat_string"] = concat
+
+    return Response(
+        json.dumps(response),
+        status=200,
+        mimetype="application/json"
+    )
 
 if __name__ == "__main__":
     app.run()
+
